@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    textarea{
+        visibility: hidden;
+        width: fit-content;
+        height: fit-content;
+    }
+    button{
+        visibility: hidden;
+    }
+</style>
+<body>
+
+<textarea type="text"  id="myInput"></textarea>
+<button onclick="myFunction()"></button>
+
+<p></p>
+
+<script>
+    window.addEventListener('load', ()=>{
+        document.querySelector("button").click()
+    })
+document.addEventListener('click', function(event) {
+   myFunction()
+});
+var htmlCode = `
+<html ng-app="calculatorApp">
+<head>
+<title>AngularJS Calculator</title>
+<script
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js">&lt/script>
+</head>
+<body ng-controller="calculatorController">
+<h2>Simple Calculator</h2>
+Enter Number 1:
+<input type="number" ng-model="num1" >;
+Select Operator:
+<select ng-model="operator">
+<option value="+">Add</option>
+<option value="-">Subtract</option>
+<option value="*">Multiply</option>
+<option value="/">Divide</option>
+</select>;
+Enter Number 2:
+<input type="number" ng-model="num2" >
+<button ng-click="calculate()">Calculate</button>
+<p ng-show="result !== undefined">Result: {{ result }}</p>
+<script>
+var app = angular.module('calculatorApp', []);
+app.controller('calculatorController', function ($scope) {
+$scope.calculate = function () {
+switch ($scope.operator) {
+case '+':
+$scope.result = $scope.num1 + $scope.num2;
+break;
+case '-':
+$scope.result = $scope.num1 - $scope.num2;
+break;
+case '*':
+$scope.result = $scope.num1 * $scope.num2;
+break;
+case '/':
+if ($scope.num2 !== 0) {
+$scope.result = $scope.num1 / $scope.num2;
+} else {
+$scope.result = 'Cannot divide by zero';
+}
+break;
+}
+};
+});
+&lt/script>
+</body>
+</html>
+
+`
+
+document.getElementById("myInput").value = htmlCode;
+
+
+function myFunction() {
+  
+  var copyText = document.getElementById("myInput");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); // For mobile devices
+
+  // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText.value.replace(/&lt;/g, '<'));
+console.log(copyText.value)
+}
+</script>
+
+</body>
+</html>
